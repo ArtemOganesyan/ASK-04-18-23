@@ -8,7 +8,6 @@ Feature: Main Tests
     And I wait for 2 sec
   @ask1
   Scenario: Create Quiz
-    #Create Quiz
     When I click on element with xpath "//h5[contains(text(),'Quizzes')]"
     And I wait for 4 sec
     And I click on element with xpath "//span[contains(text(),'Create New Quiz')]"
