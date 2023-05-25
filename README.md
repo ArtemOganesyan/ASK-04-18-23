@@ -2,8 +2,9 @@ README
 
 Konstantin Pogorelov \\
 Ernest Siliutin\\
-Anna\\ makar2dart@gmail.com
+Anna//
 Olia Isko//
 Artem Oganesyan\\
 
-
+artem.oganesyan@gmail.com
+Konstantin.Pogorelov@gmail.com
