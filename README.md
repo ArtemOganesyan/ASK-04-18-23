@@ -1,1 +1,4 @@
 README
+
+
+Konstantin Pogorelov \\
