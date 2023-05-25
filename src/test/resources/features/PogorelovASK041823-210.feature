@@ -5,9 +5,9 @@
 
 #      Given I Cleanup account by email "dkirichenko23@gmail.com" and password "student35"
 
-      Given I obtain admin token
-      Given I obtain account ID for email "dkirichenko23@gmail.com"
-      And I delete the account if it exists
+      Given KP obtain admin token
+      Given KP obtain account ID for email "dkirichenko23@gmail.com"
+      And KP delete the account if it exists
 
       Given I open url "http://ask-stage.portnov.com/#/registration"
       And I type "Denis" into element with xpath "//input[@formcontrolname='firstName']"
@@ -19,13 +19,13 @@
   @test1##ASK041823-210;ASK041823-212;ASK041823-213;ASK041823-254
 
   Scenario Outline: Positive cases (Alphanumeric; Min 1 char; max 10 char)
-    Given I type "<text>" into element with xpath "//input[@formcontrolname='group']"
+    Given I type "<groupValue>" into element with xpath "//input[@formcontrolname='group']"
     When I click on element with xpath "//button[@type='submit']"
-    Then KP page with url "" should be loaded
-    And KP wait for page with url "" to load
-    Then element with xpath "//mat-card[@class='mat-card']" should contain text "You have been Registered"
+    And I wait for 2 sec
+    Then KP page with url "http://ask-stage.portnov.com/#/registration-confirmation" should be loaded
+    Then element with xpath "//h4[contains(text(),'You have been Registered')]" should be present
     Examples:
-      | text        |
+      | groupValue  |
       | G#$34       |
       | D           |
       | GDL45#67LK  |
@@ -34,13 +34,13 @@
 
     Scenario Outline: Negative Cases (Group code field required; 11 chars; spaces)
 
-      Given I type "<text>" into element with xpath "//input[@formcontrolname='group']"
+      Given I type "<groupValue>" into element with xpath "//input[@formcontrolname='group']"
       When I click on element with xpath "//button[@type='submit']"
       And I wait for 1 sec
       Then element with xpath "//mat-card[@class='mat-card']" should contain text "<message>"
 
       Examples:
-        | text        | message                                |
+        | groupValue  | message                                |
         |             | This field is required                 |
         | GDL45#67LK2 | no more than 10 characters             |
         | GDL45 #67   | White spaces are not allowed           |
