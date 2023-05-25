@@ -7,3 +7,4 @@ Olia Isko//
 Artem Oganesyan\\
 
 artem.oganesyan@gmail.com
+natalyruzina@gmail.com
