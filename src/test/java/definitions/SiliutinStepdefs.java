@@ -1,15 +1,20 @@
 package definitions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import support.Components;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static support.TestContext.getDriver;
 
 public class SiliutinStepdefs {
+    private static String assignmentId;
+
     @Then("Siliutin type {string} into element with xpath {string}")
     public void siliutinTypeIntoElementWithXpath(String text, String fieldName) {
         getDriver().findElement(By.xpath(Components.componentFor(fieldName))).sendKeys(text);
@@ -73,7 +78,7 @@ public class SiliutinStepdefs {
         quizTitle.sendKeys("Ver6");
         getDriver().findElement(By.xpath("//mat-icon[contains(text(),'add_circle')]")).click();
         assertThat(getDriver().findElement(By.xpath("//span[contains(text(),'Preview')]")).isDisplayed()).isTrue();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
     }
 
     @Then("Siliutin add questions to Quiz")
@@ -105,8 +110,121 @@ public class SiliutinStepdefs {
     }
 
     @Then("Siliutin go Assignments to create new Assignment")
-    public void siliutinGoAssignmentsToCreateNewAssignment() {
+    public void siliutinGoAssignmentsToCreateNewAssignment() throws InterruptedException {
         getDriver().findElement(By.xpath("//h5[contains(text(),'Assignments')]")).click();
         getDriver().findElement(By.xpath("//span[contains(text(),'Create New Assignment')]")).click();
+        Thread.sleep(4000);
+    }
+
+    @And("Siliutin click on last element containing student {string}")
+    public void iClickOnLastElementContaining(String searchPattern) throws InterruptedException {
+        List<WebElement> we = getDriver().findElements(By.xpath("//text()[contains(.,'"+searchPattern+"')]/.."));
+
+        we.get(we.size() - 1).click();
+        Thread.sleep(4000);
+    }
+
+    @And("Siliutin list of Quizzes to select Quiz to Assign")
+    public void siliutinListOfQuizzesToSelectQuizToAssign() {
+        getDriver().findElement(By.xpath("//span[contains(text(),'Select Quiz To Assign')]")).click();
+    }
+
+    @And("Siliutin click on last element containing Quiz name {string}")
+    public void siliutinClickOnLastElementContainingQuizName(String searchPattern) throws InterruptedException {
+        List<WebElement> we = getDriver().findElements(By.xpath("//text()[contains(.,'"+searchPattern+"')]/.."));
+
+        we.get(we.size() - 1).click();
+        assertThat(getDriver().findElement(By.xpath("//h5[contains(text(),'Total Selected Students: 1')]")).isDisplayed()).isTrue();
+        Thread.sleep(4000);
+    }
+
+    @Then("Siliutin give Assignment")
+    public void siliutinGiveAssignment() throws InterruptedException {
+        getDriver().findElement(By.xpath("//span[contains(text(),'Give Assignment')]")).click();
+        Thread.sleep(4000);
+    }
+
+    @Then("Siliutin check Assignment for Quiz name {string}")
+    public void siliutinCheckAssignmentForQuizName(String searchPattern) {
+        List<WebElement> we = getDriver().findElements(By.xpath("//text()[contains(.,'"+searchPattern+"')]/.."));
+
+        we.get(we.size() - 1).click();
+
+    }
+
+    @Then("Siliutin LogOut from account")
+    public void siliutinLogOutFromTeacherAccount() throws InterruptedException {
+        getDriver().findElement(By.xpath("//h5[contains(text(),'Log Out')]")).click();
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//span[contains(text(),'Log Out')]")).click();
+        Thread.sleep(2000);
+        assertThat(getDriver().findElement(By.xpath("//span[contains(text(),'Sign In')]")).isDisplayed()).isTrue();
+    }
+
+    @Then("Siliutin LogIn as a Student")
+    public void siliutinLogInAsAStudent() throws InterruptedException {
+        WebElement loginField = getDriver().findElement(By.xpath("//input[@formcontrolname='email']"));
+        loginField.sendKeys("vluvr1@boranora.com");
+        WebElement passwordField = getDriver().findElement(By.xpath("//input[@formcontrolname='password']"));
+        passwordField.sendKeys("11111!");
+        getDriver().findElement(By.xpath("//button[@type='submit']")).click();
+        Thread.sleep(2000);
+        assertThat(getDriver().findElement(By.xpath("//h3[contains(text(),'Bora Nora')]")).isDisplayed()).isTrue();
+        Thread.sleep(2000);
+    }
+
+    @Then("Siliutin go to Assignments")
+    public void silitinGoToAssignments() {
+        getDriver().findElement(By.xpath("//h5[contains(text(),'My Assignments')]")).click();
+        assertThat(getDriver().findElement(By.xpath("//h4[contains(text(),'My Assignments')]")).isDisplayed()).isTrue();
+    }
+
+    @Then("Siliutin search for assignment id")
+    public void siliutinSearchForAssignmentId() throws InterruptedException {
+        WebElement we = getDriver().findElement(By.xpath("//td/a"));
+        String link = we.getAttribute("href");
+        String [] s = link.split("/");
+        assignmentId = s[s.length - 1];
+        Thread.sleep(2000);
+        System.out.println(assignmentId);
+    }
+
+    @Then("Siliutin click on Assesment with id")
+    public void siliutinClickOnAssesmentWithId() throws InterruptedException {
+        getDriver().findElement(By.xpath("//a[contains(@href,'"+assignmentId+"')]")).click();
+        Thread.sleep(2000);
+        assertThat(getDriver().findElement(By.xpath("//h4[contains(text(),'Ver6')]")).isDisplayed()).isTrue();
+    }
+
+    @Then("Siliutin submit Quiz")
+    public void siliutinSubmitQuiz() throws InterruptedException {
+        getDriver().findElement(By.xpath("//mat-checkbox[@id='mat-checkbox-1']/.//div[@class='mat-checkbox-inner-container']")).click();
+        getDriver().findElement(By.xpath("//mat-checkbox[@id='mat-checkbox-3']/.//div[@class='mat-checkbox-inner-container']")).click();
+        getDriver().findElement(By.xpath("//span[contains(text(),'Submit My Answers')]")).click();
+        Thread.sleep(2000);
+        assertThat(getDriver().findElement(By.xpath("//h1[contains(text(),'Success!')]")).isDisplayed()).isTrue();
+    }
+
+    @Then("Siliutin check grade results")
+    public void siliutinCheckGradeResults() {
+        getDriver().findElement(By.xpath("//h5[contains(text(),'My Grades')]")).click();
+        getDriver().findElement(By.xpath("//a[contains(@href,'"+assignmentId+"')]")).click();
+        assertThat(getDriver().findElement(By.xpath("//div[contains(text(),'ASSESSMENT PASSED')]")).isDisplayed()).isTrue();
+        assertThat(getDriver().findElement(By.xpath("//td[contains(text(),'5 of 5 / 100%')]")).isDisplayed()).isTrue();
+        getDriver().findElement(By.xpath("//span[contains(text(),'Close')]")).click();
+    }
+
+
+    @Then("Siliutin go to Submission, Automatically Graded")
+    public void siliutinGoToSubmissionAutomaticallyGraded() {
+        getDriver().findElement(By.xpath("//h5[contains(text(),'Submissions')]")).click();
+        getDriver().findElement(By.xpath("//div[contains(text(),'Automatically Graded')]")).click();
+    }
+
+    @Then("Teacher check Automatically Graded Quiz result")
+    public void teacherCheckAutomaticallyGradedQuizResult() {
+        getDriver().findElement(By.xpath("//a[contains(@href,'"+assignmentId+"')]")).click();
+        assertThat(getDriver().findElement(By.xpath("//div[contains(text(),'ASSESSMENT PASSED')]")).isDisplayed()).isTrue();
+        assertThat(getDriver().findElement(By.xpath("//td[contains(text(),'5 of 5 / 100%')]")).isDisplayed()).isTrue();
     }
 }
