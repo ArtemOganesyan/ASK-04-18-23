@@ -21,7 +21,7 @@
       Then element with xpath "//mat-card/div/mat-slider[@aria-valuemax='100']" should be present
       And element with xpath "//mat-slider[@aria-valuemax='10']" should be present
       Then element with xpath "//mat-card/div/mat-slider[@aria-valuemax='100']" should have attribute "aria-valuenow" as "75"
-      When I increase the slider with xpath "//mat-card/div/mat-slider[@aria-valuemax='100']" by value 25
+      When KP increase the slider with xpath "//mat-card/div/mat-slider[@aria-valuemax='100']" by value 25
       And I wait for 3 sec
       Then element with xpath "//mat-card/div/mat-slider[@aria-valuemax='100']" should have attribute "aria-valuenow" as "100"
       And element with xpath "//mat-card/h5[contains(text(),'Points')]" should contain text "5 of 5 Points"
