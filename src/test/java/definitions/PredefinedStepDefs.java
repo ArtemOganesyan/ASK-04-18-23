@@ -1,6 +1,7 @@
 // Created by Viacheslav (Slava) Skryabin 04/01/2011
 package definitions;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -221,4 +222,5 @@ public class PredefinedStepDefs {
     public void iMouseOverElementWithXpath(String xpath) {
         new Actions(getDriver()).moveToElement(getDriver().findElement(By.xpath(xpath))).perform();
     }
+
 }

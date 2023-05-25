@@ -5,6 +5,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static support.TestContext.getDriver;
@@ -13,24 +16,24 @@ import static support.TestContext.getDriver;
 public class webDriverStepDefs {
     @Given("I navigate to {string}")
     public void iNavigateTo(String sURL) {
-       //getDriver().get("http://www.google.com");
-       switch (sURL){
-           case "google" :
-               getDriver().get("http://www.google.com");
-               break;
-           case "portnov" :
-               getDriver().get("https://www.portnov.com/");
-               break;
-           case "quote" :
-               getDriver().get("https://skryabin.com/market/quote.html");
-               break;
-           case "ask" :
-               getDriver().get("http://ask-internship.portnov.com/#/login");
-               break;
-           default:
-               System.out.println("No URL found");
+        //getDriver().get("http://www.google.com");
+        switch (sURL) {
+            case "google":
+                getDriver().get("http://www.google.com");
+                break;
+            case "portnov":
+                getDriver().get("https://www.portnov.com/");
+                break;
+            case "quote":
+                getDriver().get("https://skryabin.com/market/quote.html");
+                break;
+            case "ask":
+                getDriver().get("http://ask-internship.portnov.com/#/login");
+                break;
+            default:
+                System.out.println("No URL found");
 
-       }
+        }
 
     }
 
@@ -60,7 +63,7 @@ public class webDriverStepDefs {
     public void errorMessageShouldBeDisplayed(String sErrorMessage) {
         String sActualMessage = getDriver().findElement(By.xpath("//label[@id='email-error']")).getText();
         System.out.println("Expected Error Message - " + sErrorMessage);
-        System.out.println("Actual Error Message - "+ sActualMessage);
+        System.out.println("Actual Error Message - " + sActualMessage);
         assertThat(sActualMessage.equals(sErrorMessage)).isTrue();
     }
 
