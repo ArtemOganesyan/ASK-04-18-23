@@ -29,4 +29,18 @@ Feature: Main tests
     Then Siliutin add questions to Quiz
     Then Siliutin save Quiz
     Then Siliutin go Assignments to create new Assignment
-    Then Siliutin Assign the quiz to the student
+    And Siliutin click on last element containing student "Bora Nora"
+    And Siliutin list of Quizzes to select Quiz to Assign
+    And Siliutin click on last element containing Quiz name "Ver6"
+    Then Siliutin give Assignment
+    Then Siliutin LogOut from account
+    Then Siliutin LogIn as a Student
+    Then Siliutin go to Assignments
+    Then Siliutin search for assignment id
+    Then Siliutin click on Assesment with id
+    Then Siliutin submit Quiz
+    Then Siliutin check grade results
+    Then Siliutin LogOut from account
+    Then Siliutin LogIn as a Teacher
+    Then Siliutin go to Submission, Automatically Graded
+    Then Teacher check Automatically Graded Quiz result
