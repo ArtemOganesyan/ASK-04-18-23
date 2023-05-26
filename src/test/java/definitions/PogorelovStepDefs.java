@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static support.TestContext.getDriver;
 
 public class PogorelovStepDefs {
@@ -28,8 +29,8 @@ public class PogorelovStepDefs {
 
 //    Slider defs
 
-    @When("I increase the slider with xpath {string} by value {int}")
-    public void iIncreaseSliderWithXpathToValue(String xpath, int slidevalue) {
+    @When("KP increase the slider with xpath {string} by value {int}")
+    public void kpIncreaseSliderWithXpathToValue(String xpath, int slidevalue) {
 
         WebElement slider = getDriver().findElement(By.xpath(xpath));
         for (int i = 1; i <= slidevalue; i++) {
@@ -39,8 +40,8 @@ public class PogorelovStepDefs {
     }
 
 
-    @When("I decrease the slider with xpath {string} by value {int}")
-    public void iDecreaseSliderWithXpathToValue(String xpath, int slidevalue) {
+    @When("KP decrease the slider with xpath {string} by value {int}")
+    public void kpDecreaseSliderWithXpathToValue(String xpath, int slidevalue) {
 
         WebElement slider = getDriver().findElement(By.xpath(xpath));
         for (int i = 1; i <= slidevalue; i++) {
@@ -52,31 +53,31 @@ public class PogorelovStepDefs {
 
 //    Artem's defs
 
-    @And("I type {string} into element {string}")
-    public void iTypeIntoElement(String text, String fieldName) {
+    @And("KP type {string} into element {string}")
+    public void kpTypeIntoElement(String text, String fieldName) {
         getDriver().findElement(By.xpath(PogorelovComponents.componentFor(fieldName))).sendKeys(text);
 
     }
 //    Element component defs
 
-    @And("I wait for element {string} to be present")
-    public void iWaitForElementToBePresent(String fieldName) {
+    @And("KP wait for element {string} to be present")
+    public void kpWaitForElementToBePresent(String fieldName) {
         new WebDriverWait(getDriver(), 10, 200).until(ExpectedConditions.presenceOfElementLocated(By.xpath(PogorelovComponents.componentFor(fieldName))));
     }
 
 
-    @And("I click on element {string}")
-    public void iClickOnElement(String clickElement) {
+    @And("KP click on element {string}")
+    public void kpClickOnElement(String clickElement) {
         getDriver().findElement(By.xpath(PogorelovComponents.componentFor(clickElement))).click();
     }
 
-    @And("I go back to previous page")
-    public void iGoBackToPreviousPage() {
+    @And("KP go back to previous page")
+    public void kpGoBackToPreviousPage() {
         getDriver().navigate().back();
     }
 
-    @And("I log out")
-    public void iLogOut() throws InterruptedException {
+    @And("KP log out")
+    public void kpLogOut() throws InterruptedException {
         getDriver().findElement(By.xpath("//h5[contains(text(),'Log Out')]")).click();
 //        new WebDriverWait(getDriver(),1000);
         TimeUnit.MILLISECONDS.sleep(200);
@@ -84,19 +85,19 @@ public class PogorelovStepDefs {
     }
 
 
-    @And("I click on Quiz with name {string} and index {int}")
-    public void iClickOnQuizWithNameStringAndIndexInt(String quizName, Integer index) {
+    @And("KP click on Quiz with name {string} and index {int}")
+    public void kpClickOnQuizWithNameStringAndIndexInt(String quizName, Integer index) {
         getDriver().findElement(By.xpath("//mat-expansion-panel/span/mat-panel-title[text()='" + quizName + "'][" + index + "]")).click();
 
     }
 
-    @And("I click on Quiz with index {int}")
-    public void iClickOnQuizWithIndex(Integer index) {
+    @And("KP click on Quiz with index {int}")
+    public void kpClickOnQuizWithIndex(Integer index) {
         getDriver().findElement(By.xpath("//mat-expansion-panel" + "[" + index + "]")).click();
     }
 
-    @And("I click on quiz with unique name {string}")
-    public void iClickOnQuizWithUniqueName(String quizName) {
+    @And("KP click on quiz with unique name {string}")
+    public void kpClickOnQuizWithUniqueName(String quizName) {
         getDriver().findElement(By.xpath("//mat-panel-title[contains(text(),'" + quizName + "')]")).click();
     }
 
@@ -105,8 +106,8 @@ public class PogorelovStepDefs {
 
     //   Check if Acct exists by email and password, and delete if it exists
 
-    @Given("I Cleanup account by email {string} and password {string}")
-    public void iCleanupAccountByEmail(String testAcctEmail, String testAcctPass) throws IOException, ParseException {
+    @Given("KP Cleanup account by email {string} and password {string}")
+    public void kpCleanupAccountByEmail(String testAcctEmail, String testAcctPass) throws IOException, ParseException {
 
         // Logs in as "teacher@gmail.com" to obtain admin token
 
@@ -192,17 +193,20 @@ public class PogorelovStepDefs {
 
     }
 
+//      Obtaining acct id by email (mysql)
 
-    @Given("I obtain account ID for email {string}")
-    public void iObtainAccountIDForEmail(String acctEmail) throws SQLException {
+    @Given("KP obtain account ID for email {string}")
+    public void kpObtainAccountIDForEmail(String acctEmail) throws SQLException {
         System.out.println(Helper.getAccessToken(acctEmail));
         String[] helperToken = (Helper.getAccessToken(acctEmail).toString().split(";"));
         acctID = helperToken[0];
+        System.out.println(acctID);
 
     }
+//      Obtaining token for teacher@gmail
 
-    @Given("I obtain admin token")
-    public void iObtainAdminToken() throws IOException, ParseException {
+    @Given("KP obtain admin token")
+    public void kpObtainAdminToken() throws IOException, ParseException {
 
         // Logs in as "teacher@gmail.com" to obtain admin token
 
@@ -226,12 +230,16 @@ public class PogorelovStepDefs {
         System.out.println("Admin token for teacher@gmail.com was obtained");
     }
 
-    @And("I delete the account if it exists")
-    public void iDeleteTheAccountIfItExists() throws IOException {
+//      Deletes account for id stored globally
 
-        if (!acctID.equals("0")) {
+    @And("KP delete the account if it exists")
+    public void kpDeleteTheAccountIfItExists() throws IOException {
+
+        if (!acctID.equals("No data")) {
 
             System.out.println("Account was found. Deleting.");
+
+            System.out.println(acctID);
 
             // API DELETE request is sent
 
@@ -242,22 +250,24 @@ public class PogorelovStepDefs {
             Request request = new Request.Builder()
                     .url("http://ask-stage.portnov.com/api/v1/users/"+acctID)
                     .method("DELETE", body)
-                    .addHeader("Authorization", token)
+                    .addHeader("Authorization", " Bearer "+token)
                     .build();
             Response response = client.newCall(request).execute();
 
-            System.out.println("User account deleted.");
+
         }
 
         else System.out.println("Account not found in system.");
     }
 
+//      Verifications for url
 
     @Then("KP page with url {string} should be loaded")
     public void kpPageWithUrlShouldBeLoaded(String url) {
-
+        assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
 
     }
+
 
 }
 
