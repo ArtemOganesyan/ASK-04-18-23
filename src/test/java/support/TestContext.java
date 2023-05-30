@@ -59,6 +59,7 @@ public class TestContext {
                     chromeOptions.addArguments("--disable-dev-shm-usage");
                     chromeOptions.addArguments("--disable-gpu");
                     chromeOptions.addArguments("--disable-software-rasterizer");
+                    chromeOptions.setBinary("/bin/chromium-browser");
                     chromeOptions.setExperimentalOption("prefs", chromePreferences);
                     System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     if (isHeadless) {
