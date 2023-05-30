@@ -32,7 +32,7 @@ public class TestContext {
     }
 
     public static void initialize() {
-        initialize("chrome", "local", true);
+        initialize("chrome", "local", false);
     }
 
     public static void teardown() {
@@ -53,7 +53,10 @@ public class TestContext {
                     chromePreferences.put("credentials_enable_service", false);
                     chromePreferences.put("password_manager_enabled", false);
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--start-maximized");
+//                    chromeOptions.addArguments("--start-maximized");
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
                     chromeOptions.setExperimentalOption("prefs", chromePreferences);
                     System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     if (isHeadless) {
