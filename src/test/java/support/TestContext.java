@@ -60,6 +60,7 @@ public class TestContext {
                         chromeOptions.setHeadless(true);
                         chromeOptions.addArguments("--window-size=" + size.getWidth() + "," + size.getWidth());
                         chromeOptions.addArguments("--disable-gpu");
+                        chromeOptions.setBinary("/bin/chromium-browser");
                     }
                     driver = new ChromeDriver(chromeOptions);
                     break;
