@@ -1,4 +1,4 @@
-@feature_main
+@feature_main_siliutin
 Feature: Main tests
 
   @scenario1_siliutin #ASK041823-435
