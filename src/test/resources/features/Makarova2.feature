@@ -1,4 +1,4 @@
-@ask
+@makarova_create_quiz
 Feature: Main Tests
   Background:
     Given I open url "http://ask-stage.portnov.com/#/login"
@@ -6,7 +6,7 @@ Feature: Main Tests
     And I type "123456Tre" into element with xpath "//input[@formcontrolname='password']"
     And I click on element with xpath "//*[contains(text(),'Sign In')]"
     And I wait for 2 sec
-  @ask1
+  @makarova_create_quiz1
   Scenario: Create Quiz
     When I click on element with xpath "//h5[contains(text(),'Quizzes')]"
     And I wait for 4 sec

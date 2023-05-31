@@ -1,8 +1,8 @@
-@Scenario
+@makarova_test_cases
 Feature: Test Cases
   Background:
     Given I open url "http://ask-stage.portnov.com/#/registration"
-  @ScenarioPositive
+  @makarova_test_cases_positive
   Scenario Outline:
     When I type "<Password>" into element with xpath "//input[@formcontrolname='password']"
     And I type "<Password>" into element with xpath "//input[@formcontrolname='confirmPassword']"
@@ -18,7 +18,7 @@ Feature: Test Cases
       | Tre!@#12345                      |
       | 12345                            |
       | 12345678901234567890123456789012 |
-  @ScenarioNegative
+  @makarova_test_cases_negative
   Scenario Outline:
     When I type "<Password>" into element with xpath "//input[@formcontrolname='password']"
     And I type "<Confirm Password>" into element with xpath "//input[@formcontrolname='confirmPassword']"
