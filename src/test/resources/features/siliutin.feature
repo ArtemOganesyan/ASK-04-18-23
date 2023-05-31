@@ -1,7 +1,7 @@
 @feature_main
 Feature: Main tests
 
-  @scenario1 #ASK041823-435
+  @scenario1_siliutin #ASK041823-435
   Scenario Outline: Student, Settings - Full Name, Min 2 characters plus 1 space between two words
     Given I open url "http://ask-stage.portnov.com"
     Then Siliutin type "ioceanic@superintendent.store" into element with xpath "LoginTextField"
@@ -21,7 +21,7 @@ Feature: Main tests
       | Siliutin E1     |
       | Ernest Siliutin |
 
-  @scenario2 #ASK041823-488
+  @scenario2_siliutin #ASK041823-488
   Scenario: Automatically Graded Multiple-Choice Quiz
     Given Siliutin LogIn as a Teacher
     Then Siliutin navigate to the Quizzes section
