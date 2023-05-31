@@ -198,17 +198,21 @@ public class SiliutinStepdefs {
 
     @Then("Siliutin submit Quiz")
     public void siliutinSubmitQuiz() throws InterruptedException {
-        getDriver().findElement(By.xpath("//mat-checkbox[@id='mat-checkbox-1']/.//div[@class='mat-checkbox-inner-container']")).click();
-        getDriver().findElement(By.xpath("//mat-checkbox[@id='mat-checkbox-3']/.//div[@class='mat-checkbox-inner-container']")).click();
+        getDriver().findElement(By.xpath("//label[@class='mat-checkbox-layout']/.//*[contains(text(),'A')]")).click();
+        getDriver().findElement(By.xpath("//label[@class='mat-checkbox-layout']/.//*[contains(text(),'C')]")).click();
         getDriver().findElement(By.xpath("//span[contains(text(),'Submit My Answers')]")).click();
         Thread.sleep(2000);
         assertThat(getDriver().findElement(By.xpath("//h1[contains(text(),'Success!')]")).isDisplayed()).isTrue();
+        getDriver().findElement(By.xpath("//span[contains(text(),'Ok')]")).click();
+        Thread.sleep(2000);
     }
 
     @Then("Siliutin check grade results")
-    public void siliutinCheckGradeResults() {
+    public void siliutinCheckGradeResults() throws InterruptedException {
         getDriver().findElement(By.xpath("//h5[contains(text(),'My Grades')]")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.xpath("//a[contains(@href,'"+assignmentId+"')]")).click();
+        Thread.sleep(2000);
         assertThat(getDriver().findElement(By.xpath("//div[contains(text(),'ASSESSMENT PASSED')]")).isDisplayed()).isTrue();
         assertThat(getDriver().findElement(By.xpath("//td[contains(text(),'5 of 5 / 100%')]")).isDisplayed()).isTrue();
         getDriver().findElement(By.xpath("//span[contains(text(),'Close')]")).click();
@@ -216,14 +220,17 @@ public class SiliutinStepdefs {
 
 
     @Then("Siliutin go to Submission, Automatically Graded")
-    public void siliutinGoToSubmissionAutomaticallyGraded() {
+    public void siliutinGoToSubmissionAutomaticallyGraded() throws InterruptedException {
         getDriver().findElement(By.xpath("//h5[contains(text(),'Submissions')]")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.xpath("//div[contains(text(),'Automatically Graded')]")).click();
+        Thread.sleep(2000);
     }
 
     @Then("Teacher check Automatically Graded Quiz result")
-    public void teacherCheckAutomaticallyGradedQuizResult() {
+    public void teacherCheckAutomaticallyGradedQuizResult() throws InterruptedException {
         getDriver().findElement(By.xpath("//a[contains(@href,'"+assignmentId+"')]")).click();
+        Thread.sleep(2000);
         assertThat(getDriver().findElement(By.xpath("//div[contains(text(),'ASSESSMENT PASSED')]")).isDisplayed()).isTrue();
         assertThat(getDriver().findElement(By.xpath("//td[contains(text(),'5 of 5 / 100%')]")).isDisplayed()).isTrue();
     }
