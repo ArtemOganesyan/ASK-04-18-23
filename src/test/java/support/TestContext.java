@@ -62,7 +62,7 @@ public class TestContext {
                         chromeOptions.addArguments("--disable-gpu");
                     }
                     if (envLinux) {
-                        chromeOptions.setBinary("/bin/chromium-browser");
+                        chromeOptions.setBinary("/usr/bin/google-chrome");
                     }
                     driver = new ChromeDriver(chromeOptions);
                     break;
