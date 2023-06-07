@@ -39,7 +39,7 @@ public class TestContext {
         driver.quit();
     }
 
-    public static void initialize(String browser, String testEnv, boolean isHeadless) {
+    public static void initialize(String browser, String testEnv, boolean isHeadless, boolean envLinux) {
         Dimension size = new Dimension(1920, 1080);
         Point position = new Point(0, 0);
         if (testEnv.equals("local")) {
@@ -60,6 +60,9 @@ public class TestContext {
                         chromeOptions.setHeadless(true);
                         chromeOptions.addArguments("--window-size=" + size.getWidth() + "," + size.getWidth());
                         chromeOptions.addArguments("--disable-gpu");
+                    }
+                    if (envLinux) {
+                        chromeOptions.setBinary("/bin/chromium-browser");
                     }
                     driver = new ChromeDriver(chromeOptions);
                     break;
