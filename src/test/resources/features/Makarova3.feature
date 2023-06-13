@@ -1,6 +1,6 @@
-@Scenario
+@makarova_scenario
 Feature: Tests
-  @ScenarioPositive
+  @makarova_scenario_test_cases_positive
   Scenario Outline: Registration Password / Positive
     Given I register new user
     And I enter "<Password>"
@@ -12,7 +12,8 @@ Feature: Tests
       | 12345                            |
       | 12345678901234567890123456789012 |
 
-  @ScenarioNegative
+
+  @makarova_scenario_test_cases__negative
   Scenario Outline: Registration Password / Negative
     Given I register new user
     And I enter "<Password>" and "<Confirm Password>"
@@ -25,7 +26,7 @@ Feature: Tests
       | Tre!@ #12345                      | Tre!@ #12345                      |
       |                                   |                                   |
       | 1234!@Tre                         | 5678!@Poi                         |
-  @CreateQuiz
+  @makarova_scenario_createQuiz
   Scenario: Create New Quiz
     Given I log in as a Teacher
     And I create new quiz
